@@ -1,0 +1,865 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+/* ═══════════════════════════════════════════
+   ÜÇGEN YAPI — PROJECTS / PROJELER SECTION
+   ═══════════════════════════════════════════ */
+
+.projects {
+  --gold: #C9A84C;
+  --gold-light: #E8D5A3;
+  --gold-dark: #8B7332;
+  --charcoal: #1E2A38;
+  --charcoal-deep: #162029;
+  --smoke: #1B2735;
+  --ivory: #F5F0E8;
+  --ivory-muted: rgba(245, 240, 232, 0.6);
+  --glass: rgba(30, 42, 56, 0.5);
+
+  position: relative;
+  background: var(--charcoal-deep);
+  padding: 140px 0 0 0;
+  overflow: hidden;
+}
+
+/* ── Section Header ── */
+.projects__header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.projects__label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__label.visible {
+  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: var(--ivory);
+  line-height: 1.1;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.projects__heading.visible {
+  animation: projRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.projects__heading em {
+  font-style: italic;
+  color: var(--gold);
+}
+/* ── Project Selector Dropdown ── */.projects__selector {  position: relative;  display: inline-block;  margin-top: 28px;  z-index: 20;  opacity: 0;  transform: translateY(20px);}.projects__selector.visible {  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;}.projects__selector-btn {  display: inline-flex;  align-items: center;  gap: 14px;  font-family: 'Outfit', sans-serif;  font-size: 0.85rem;  font-weight: 400;  color: var(--ivory);  background: var(--glass);  backdrop-filter: blur(12px);  border: 1px solid rgba(201, 168, 76, 0.15);  padding: 14px 24px;  cursor: pointer;  letter-spacing: 0.05em;  transition: all 0.3s ease;  min-width: 320px;  text-align: left;}.projects__selector-btn:hover {  border-color: rgba(201, 168, 76, 0.35);  background: rgba(30, 42, 56, 0.7);}.projects__selector-btn-text { flex: 1; }.projects__selector-btn-meta {  display: flex;  align-items: center;  gap: 10px;}.projects__selector-status {  font-size: 0.6rem;  font-weight: 400;  letter-spacing: 0.1em;  text-transform: uppercase;  padding: 3px 8px;  border-radius: 2px;}.projects__selector-status--done {  color: #4CAF50;  background: rgba(76, 175, 80, 0.1);  border: 1px solid rgba(76, 175, 80, 0.2);}.projects__selector-status--building {  color: #FFC107;  background: rgba(255, 193, 7, 0.1);  border: 1px solid rgba(255, 193, 7, 0.2);}.projects__selector-arrow {  font-size: 0.6rem;  color: var(--gold);  transition: transform 0.3s ease;  line-height: 1;}.projects__selector-arrow--open { transform: rotate(180deg); }.projects__dropdown {  position: absolute;  top: calc(100% + 6px);  left: 0;  right: 0;  background: var(--smoke);  border: 1px solid rgba(201, 168, 76, 0.12);  backdrop-filter: blur(20px);  overflow: hidden;  opacity: 0;  transform: translateY(-8px);  pointer-events: none;  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);}.projects__dropdown--open {  opacity: 1;  transform: translateY(0);  pointer-events: auto;}.projects__dropdown-item {  display: flex;  align-items: center;  justify-content: space-between;  width: 100%;  font-family: 'Outfit', sans-serif;  font-size: 0.82rem;  font-weight: 400;  color: var(--ivory-muted);  background: none;  border: none;  border-bottom: 1px solid rgba(245, 240, 232, 0.04);  padding: 16px 24px;  cursor: pointer;  text-align: left;  transition: all 0.25s ease;}.projects__dropdown-item:last-child { border-bottom: none; }.projects__dropdown-item:hover {  background: rgba(201, 168, 76, 0.06);  color: var(--ivory);}.projects__dropdown-item--active {  color: var(--gold);  background: rgba(201, 168, 76, 0.05);}.projects__dropdown-item-info {  display: flex;  flex-direction: column;  gap: 2px;}.projects__dropdown-item-name { font-weight: 400; }.projects__dropdown-item-location {  font-size: 0.7rem;  font-weight: 300;  color: var(--ivory-muted);  opacity: 0.7;}.projects__dropdown-item-year {  font-family: 'Cormorant Garamond', serif;  font-size: 1rem;  font-weight: 600;  color: var(--gold);  opacity: 0.6;}.projects__heading-line {  display: block;  width: 60px;  height: 1px;  background: var(--gold);  margin: 24px auto 0;  opacity: 0;  transform: scaleX(0);}.projects__heading-line.visible {  animation: projLineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;}
+
+/* ── Tab Navigation ── */
+.projects__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.projects__tab {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+  background: none;
+  border: none;
+  padding: 16px 36px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+.projects__tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__tab:hover {
+  color: var(--ivory);
+}
+
+.projects__tab--active {
+  color: var(--gold);
+}
+
+.projects__tab--active::after {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════
+   DIŞ ALAN — Exterior Section
+   ═══════════════════════════════════════════ */
+
+.projects__exterior {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Hero Image (Arazi kuşbakışı) ── */
+.projects__hero-image {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.projects__hero-image.visible {
+  animation: projRevealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__hero-image:hover img {
+  transform: scale(1.03);
+}
+
+.projects__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(22, 32, 41, 0.8) 100%);
+  pointer-events: none;
+}
+
+.projects__hero-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--charcoal-deep);
+  background: var(--gold);
+  padding: 8px 18px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.projects__hero-title {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--ivory);
+}
+
+/* ── Project Stats Grid ── */
+.projects__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.projects__stat-card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  padding: 30px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__stat-card.visible {
+  animation: projRevealUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__stat-card:nth-child(1).visible { animation-delay: 0.1s; }
+.projects__stat-card:nth-child(2).visible { animation-delay: 0.2s; }
+.projects__stat-card:nth-child(3).visible { animation-delay: 0.3s; }
+.projects__stat-card:nth-child(4).visible { animation-delay: 0.4s; }
+
+.projects__stat-card:hover {
+  border-color: rgba(201, 168, 76, 0.2);
+  transform: translateY(-4px);
+  background: rgba(30, 42, 56, 0.7);
+}
+
+.projects__stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.projects__stat-card:hover::before {
+  opacity: 1;
+}
+
+.projects__stat-icon {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 14px solid var(--gold);
+  margin: 0 auto 16px;
+  opacity: 0.6;
+}
+
+.projects__stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+
+.projects__stat-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--ivory-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  display: block;
+}
+
+/* ── Exterior Gallery Grid ── */
+.projects__ext-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.projects__ext-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  height: 320px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__ext-card.visible {
+  animation: projRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__ext-card:nth-child(1).visible { animation-delay: 0.1s; }
+.projects__ext-card:nth-child(2).visible { animation-delay: 0.25s; }
+
+.projects__ext-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__ext-card:hover img {
+  transform: scale(1.06);
+}
+
+.projects__ext-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(22, 32, 41, 0.85) 100%);
+  pointer-events: none;
+}
+
+.projects__ext-card-info {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+}
+
+.projects__ext-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ivory);
+  margin-bottom: 4px;
+}
+
+.projects__ext-card-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--ivory-muted);
+}
+
+/* ═══════════════════════════════════════════
+   İÇ ALAN — Interior Section
+   ═══════════════════════════════════════════ */
+
+.projects__interior {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 60px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.projects__interior-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__interior-header.visible {
+  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__interior-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300;
+  color: var(--ivory);
+}
+
+.projects__interior-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.projects__interior-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-left: 30px;
+  opacity: 0.3;
+}
+
+/* ── Interior Gallery ── */
+.projects__int-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.projects__int-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--smoke);
+  opacity: 0;
+  transform: translateY(25px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__int-card.visible {
+  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__int-card:nth-child(1).visible { animation-delay: 0.1s; }
+.projects__int-card:nth-child(2).visible { animation-delay: 0.2s; }
+.projects__int-card:nth-child(3).visible { animation-delay: 0.3s; }
+
+.projects__int-card:hover {
+  transform: translateY(-6px);
+}
+
+.projects__int-card-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.projects__int-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.projects__int-card:hover .projects__int-card-image img {
+  transform: scale(1.08);
+}
+
+.projects__int-card-body {
+  padding: 24px;
+}
+
+.projects__int-card-tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.projects__int-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--ivory);
+  margin-bottom: 8px;
+}
+
+.projects__int-card-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--ivory-muted);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   DAİRE SEÇENEKLERİ — Apartment Options
+   ═══════════════════════════════════════════ */
+
+.projects__apartments {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.projects__apt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__apt-header.visible {
+  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__apt-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300;
+  color: var(--ivory);
+}
+
+.projects__apt-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.projects__apt-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-left: 30px;
+  opacity: 0.3;
+}
+
+/* ── Apartment Cards ── */
+.projects__apt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.projects__apt-card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 168, 76, 0.06);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.projects__apt-card.visible {
+  animation: projRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__apt-card:nth-child(1).visible { animation-delay: 0.1s; }
+.projects__apt-card:nth-child(2).visible { animation-delay: 0.2s; }
+.projects__apt-card:nth-child(3).visible { animation-delay: 0.3s; }
+
+.projects__apt-card:hover {
+  border-color: rgba(201, 168, 76, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.projects__apt-card-top {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+}
+
+.projects__apt-card-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.projects__apt-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ivory);
+}
+
+.projects__apt-card-body {
+  padding: 24px 28px;
+}
+
+.projects__apt-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.projects__apt-card-feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.04);
+}
+
+.projects__apt-card-feature:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.projects__apt-feature-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--ivory-muted);
+}
+
+.projects__apt-feature-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ivory);
+}
+
+.projects__apt-card-footer {
+  padding: 20px 28px;
+  border-top: 1px solid rgba(201, 168, 76, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.projects__apt-card-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.projects__apt-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+}
+
+.projects__apt-card-dot--limited {
+  background: #FFC107;
+  box-shadow: 0 0 8px rgba(255, 193, 7, 0.4);
+}
+
+.projects__apt-card-status-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ivory-muted);
+  letter-spacing: 0.05em;
+}
+
+.projects__apt-card-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--gold);
+  background: none;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 8px 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projects__apt-card-btn:hover {
+  background: var(--gold);
+  color: var(--charcoal-deep);
+  border-color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════
+   BOTTOM CTA BANNER
+   ═══════════════════════════════════════════ */
+
+.projects__cta {
+  background: var(--smoke);
+  border-top: 1px solid rgba(201, 168, 76, 0.08);
+  padding: 80px 60px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.projects__cta.visible {
+  animation: projRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projects__cta-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: 28px;
+}
+
+.projects__cta-text em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.projects__cta-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  background: var(--gold);
+  color: var(--charcoal-deep);
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects__cta-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(201, 168, 76, 0.3);
+}
+
+/* ── Decorative Elements ── */
+.projects__deco-triangle {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(201, 168, 76, 0.03);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.projects__deco-triangle--1 {
+  top: 100px;
+  left: -60px;
+  width: 250px;
+  height: 250px;
+  transform: rotate(-10deg);
+}
+
+.projects__deco-triangle--2 {
+  bottom: 400px;
+  right: -80px;
+  width: 350px;
+  height: 350px;
+  transform: rotate(8deg);
+}
+
+/* ═══════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════ */
+
+@keyframes projRevealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes projLineExpand {
+  to {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .projects {
+    padding: 100px 0 0 0;
+  }
+
+  .projects__exterior,
+  .projects__interior,
+  .projects__apartments {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .projects__stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects__int-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .projects__apt-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+.projects__selector-btn {    min-width: auto;    width: 100%;    font-size: 0.8rem;    padding: 12px 18px;  }
+  .projects {
+    padding: 80px 0 0 0;
+  }
+
+  .projects__exterior,
+  .projects__interior,
+  .projects__apartments {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .projects__hero-image {
+    height: 300px;
+  }
+
+  .projects__stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .projects__stat-card {
+    padding: 20px 16px;
+  }
+
+  .projects__stat-value {
+    font-size: 1.8rem;
+  }
+
+  .projects__ext-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .projects__ext-card {
+    height: 250px;
+  }
+
+  .projects__int-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .projects__apt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects__interior-header,
+  .projects__apt-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .projects__interior-line,
+  .projects__apt-line {
+    width: 60px;
+    margin-left: 0;
+  }
+
+  .projects__tabs {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .projects__tab {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+  }
+
+  .projects__cta {
+    padding: 60px 24px;
+  }
+
+  .projects__deco-triangle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects *, .projects *::before, .projects *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
