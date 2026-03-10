@@ -170,13 +170,11 @@
   gap: 14px;
 }
 
-.hero__logo-icon {
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 28px solid var(--gold);
-  filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.3));
+.hero__logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: lighten;
 }
 
 .hero__logo-text {

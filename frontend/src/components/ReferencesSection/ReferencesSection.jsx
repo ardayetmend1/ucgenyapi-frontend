@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import './ReferencesSection.css';
 import { fetchReferences } from '../../services/api';
+import ucgenLogoBg from '../../assets/images/ucgen-logo-bg.jpeg';
 
 function useRevealRef() {
   const ref = useCallback((el) => {
@@ -33,6 +34,9 @@ function ReferencesSection() {
 
   return (
     <section className="references" id="referanslar">
+      <div className="references__bg-logo">
+        <img src={ucgenLogoBg} alt="" aria-hidden="true" />
+      </div>
       <div className="references__glow" />
 
       <div className="references__header">

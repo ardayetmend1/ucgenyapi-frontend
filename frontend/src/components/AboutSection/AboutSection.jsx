@@ -80,7 +80,7 @@ function AboutSection() {
       <div className="about__header">
         <span className="about__label" ref={observe}>Hakkımızda</span>
         <h2 className="about__heading" ref={observe}>
-          {c('about_heading', '25 Yıllık Güven ve Kalite')}
+          {c('about_heading', 'Güven, Kalite ve Estetik')}
         </h2>
         <span className="about__heading-line" ref={observe} />
       </div>
@@ -101,32 +101,32 @@ function AboutSection() {
             </div>
           ))}
           <div className="about__badge" ref={observe}>
-            <span className="about__badge-number">{c('about_badge_number', '25')}</span>
-            <span className="about__badge-text">{c('about_badge_text', 'Yıllık Tecrübe')}</span>
+            <span className="about__badge-number">{c('about_badge_number', 'A+')}</span>
+            <span className="about__badge-text">{c('about_badge_text', 'Kalite Güvencesi')}</span>
           </div>
         </div>
 
         {/* Right: Text Content */}
         <div className="about__text">
           <blockquote className="about__quote" ref={observe}>
-            "{c('about_quote', 'Daha iyi bir dünya, daha yaşanılır bir çevre oluşturma yolculuğumuzda insana dokunan yapılar tasarlıyoruz.')}"
+            "{c('about_quote', 'Her projede kaliteyi, güveni ve estetik mükemmelliği bir arada sunuyoruz.')}"
           </blockquote>
 
           <p className="about__paragraph" ref={observe}>
-            {c('about_paragraph_1', 'Üçgen Yapı olarak 25 yılı aşkın tecrübemizle Ankara\'da inşaat sektörünün öncü firmalarından biri olmanın gururunu taşıyoruz. Geçmiş ve kültürel değerlerden ilham alarak, modern mimariyi doğanın huzuruyla birleştiren yaşam alanları inşa ediyoruz.')}
+            {c('about_paragraph_1', 'Üçgen Yapı olarak İstanbul merkezli inşaat ve mimarlık hizmetleri sunuyoruz. Konut projelerinden ofis, depo ve ticari alanlara kadar geniş bir yelpazede anahtar teslim çözümler üretiyoruz. İç mimarlık, tadilat ve dekorasyon hizmetlerimizle projelerinizi baştan sona yönetiyoruz.')}
           </p>
 
           <p className="about__paragraph" ref={observe}>
-            {c('about_paragraph_2', '300\'den fazla teslim edilmiş daire, 25\'in üzerinde tamamlanmış proje ve her biri özenle tasarlanmış sosyal tesislerimizle, sadece bina değil — yaşam inşa ediyoruz. Havuzundan fitness merkezine, çocuk oyun alanlarından peyzaj düzenlemelerine kadar her detayda kaliteyi hissedebilirsiniz.')}
+            {c('about_paragraph_2', 'Müşterilerimize komple tadilat, kısmi yenileme, ofis tadilatı ve depo dönüşümü gibi hizmetler sunarak her ölçekteki projeye profesyonel çözümler getiriyoruz. Mimarlık ve iç mimarlık ekibimizle tasarımdan uygulamaya kadar tüm süreçlerde yanınızdayız.')}
           </p>
 
           {/* Value Pillars */}
           <div className="about__pillars" ref={observe}>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">{c('about_pillar_1_title', 'Modern Mimari')}</div>
+              <div className="about__pillar-title">{c('about_pillar_1_title', 'İç Mimarlık Hizmetleri')}</div>
               <div className="about__pillar-desc">
-                {c('about_pillar_1_desc', 'Çağdaş tasarım anlayışıyla işlevsel ve estetik yapılar')}
+                {c('about_pillar_1_desc', 'Profesyonel iç mimarlık ve dekorasyon çözümleri')}
               </div>
             </div>
             <div className="about__pillar">
@@ -145,9 +145,9 @@ function AboutSection() {
             </div>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">{c('about_pillar_4_title', 'Yaşam Odaklı')}</div>
+              <div className="about__pillar-title">{c('about_pillar_4_title', 'Tadilat Hizmetleri')}</div>
               <div className="about__pillar-desc">
-                {c('about_pillar_4_desc', 'İnsan merkezli, sosyal alanlarla zenginleştirilmiş projeler')}
+                {c('about_pillar_4_desc', 'Komple ve kısmi tadilat, yenileme ve restorasyon işleri')}
               </div>
             </div>
           </div>

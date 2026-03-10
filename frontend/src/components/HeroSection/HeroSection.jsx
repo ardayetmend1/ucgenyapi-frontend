@@ -9,6 +9,7 @@ import blokDetail from '../../assets/images/blok-detail.jpg';
 import arazi from '../../assets/images/arazi.jpg';
 import salon from '../../assets/images/salon.jpg';
 import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
+import ucgenLogo from '../../assets/images/logo03.jpg';
 
 const fallbackSlides = [
   { src: blokHavuz, alt: 'Üçgen Yapı — Havuz ve Yaşam Alanı' },
@@ -71,7 +72,7 @@ function HeroSection() {
       {/* ── Navigation ── */}
       <nav className="hero__nav">
         <div className="hero__logo">
-          <div className="hero__logo-icon" aria-hidden="true" />
+          <img className="hero__logo-img" src={ucgenLogo} alt="Üçgen Yapı" />
           <div className="hero__logo-text">
             <span>Üçgen</span> Yapı
           </div>
@@ -89,17 +90,17 @@ function HeroSection() {
 
       {/* ── Main Content ── */}
       <div className="hero__content">
-        <p className="hero__subtitle">{c('hero_subtitle', 'Mimari Mükemmellik · 2024')}</p>
+        <p className="hero__subtitle">{c('hero_subtitle', 'İnşaat · Mimarlık · Tadilat')}</p>
 
         <h1 className="hero__title">
-          {c('hero_title_1', 'Yaşamın Yeni')}
+          {c('hero_title_1', 'Anahtar Teslim')}
           <span className="hero__title-bold">
-            <em>{c('hero_title_2', 'Geometrisi')}</em>
+            <em>{c('hero_title_2', 'Çözümler')}</em>
           </span>
         </h1>
 
         <p className="hero__description">
-          {c('hero_description', 'Üçgen Yapı olarak, modern mimariyi doğanın huzuruyla birleştiriyoruz. Havuzdan sosyal tesislere, her detayda kaliteyi ve konforu hissedebileceğiniz yaşam alanları inşa ediyoruz.')}
+          {c('hero_description', 'Üçgen Yapı olarak anahtar teslim inşaat projelerinden iç mimarlık, tadilat ve dekorasyon hizmetlerine kadar geniş bir yelpazede profesyonel çözümler sunuyoruz.')}
         </p>
 
         <div className="hero__actions">
@@ -131,25 +132,6 @@ function HeroSection() {
         <span className="hero__scroll-text">Keşfet</span>
       </div>
 
-      {/* ── Stats Bar ── */}
-      <div className="hero__stats">
-        <div className="hero__stat">
-          <span className="hero__stat-number">{c('hero_stat_1_number', '4')}</span>
-          <span className="hero__stat-label">{c('hero_stat_1_label', 'Konut Bloğu')}</span>
-        </div>
-        <div className="hero__stat">
-          <span className="hero__stat-number">{c('hero_stat_2_number', '120+')}</span>
-          <span className="hero__stat-label">{c('hero_stat_2_label', 'Modern Daire')}</span>
-        </div>
-        <div className="hero__stat">
-          <span className="hero__stat-number">{c('hero_stat_3_number', '5★')}</span>
-          <span className="hero__stat-label">{c('hero_stat_3_label', 'Sosyal Tesis')}</span>
-        </div>
-        <div className="hero__stat">
-          <span className="hero__stat-number">{c('hero_stat_4_number', 'Hemen')}</span>
-          <span className="hero__stat-label">{c('hero_stat_4_label', 'Teslim')}</span>
-        </div>
-      </div>
     </section>
   );
 }

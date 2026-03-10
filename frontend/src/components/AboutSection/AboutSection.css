@@ -419,7 +419,7 @@
 
 .about__process-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 300;
   color: var(--gold);
   letter-spacing: 0.35em;
@@ -473,8 +473,8 @@
 .about__step:nth-child(5).visible { animation-delay: 0.5s; }
 
 .about__step-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border: 2px solid var(--gold);
   background: var(--smoke);
   border-radius: 50%;
@@ -491,7 +491,7 @@
 
 .about__step-number {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--gold);
   display: block;
@@ -499,7 +499,7 @@
 
 .about__step-label {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 400;
   color: var(--ivory);
   margin-top: 8px;
@@ -508,7 +508,7 @@
 
 .about__step-desc {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 300;
   color: var(--ivory-muted);
   margin-top: 4px;
