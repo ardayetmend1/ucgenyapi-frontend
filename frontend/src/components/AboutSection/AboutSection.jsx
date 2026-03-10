@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './AboutSection.css';
+import { useSiteContent } from '../../context/SiteContentContext';
+import { fetchAboutImages } from '../../services/api';
 
 import blokDetail from '../../assets/images/blok-detail.jpg';
 import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
@@ -37,15 +39,29 @@ function useScrollReveal() {
   return addRef;
 }
 
-const images = [
+const fallbackImages = [
   { src: blokDetail, alt: 'Üçgen Yapı — Modern Bina Cephesi' },
   { src: sosyalTesis, alt: 'Üçgen Yapı — Sosyal Tesis Alanı' },
   { src: mutfak, alt: 'Üçgen Yapı — Modern Mutfak Tasarımı' },
 ];
 
+const imageClasses = ['about__image--main', 'about__image--secondary', 'about__image--accent'];
+
 function AboutSection() {
   const observe = useScrollReveal();
   const [lightbox, setLightbox] = useState(null);
+  const [images, setImages] = useState(fallbackImages);
+  const c = useSiteContent();
+
+  useEffect(() => {
+    fetchAboutImages()
+      .then((data) => {
+        if (data.length > 0) {
+          setImages(data.map((img) => ({ src: img.image, alt: img.alt })));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="about" id="hakkimizda">
@@ -64,7 +80,7 @@ function AboutSection() {
       <div className="about__header">
         <span className="about__label" ref={observe}>Hakkımızda</span>
         <h2 className="about__heading" ref={observe}>
-          25 Yıllık <em>Güven</em> ve Kalite
+          {c('about_heading', '25 Yıllık Güven ve Kalite')}
         </h2>
         <span className="about__heading-line" ref={observe} />
       </div>
@@ -73,73 +89,65 @@ function AboutSection() {
       <div className="about__content">
         {/* Left: Image Composition */}
         <div className="about__visuals">
-          <div className="about__image about__image--main" ref={observe} onClick={() => setLightbox(0)}>
-            <img src={blokDetail} alt="Üçgen Yapı — Modern Bina Cephesi" />
-            <div className="about__image-zoom" aria-hidden="true">+</div>
-          </div>
-          <div className="about__image about__image--secondary" ref={observe} onClick={() => setLightbox(1)}>
-            <img src={sosyalTesis} alt="Üçgen Yapı — Sosyal Tesis Alanı" />
-            <div className="about__image-zoom" aria-hidden="true">+</div>
-          </div>
-          <div className="about__image about__image--accent" ref={observe} onClick={() => setLightbox(2)}>
-            <img src={mutfak} alt="Üçgen Yapı — Modern Mutfak Tasarımı" />
-            <div className="about__image-zoom" aria-hidden="true">+</div>
-          </div>
+          {images.slice(0, 3).map((img, i) => (
+            <div
+              key={i}
+              className={`about__image ${imageClasses[i] || ''}`}
+              ref={observe}
+              onClick={() => setLightbox(i)}
+            >
+              <img src={img.src} alt={img.alt} />
+              <div className="about__image-zoom" aria-hidden="true">+</div>
+            </div>
+          ))}
           <div className="about__badge" ref={observe}>
-            <span className="about__badge-number">25</span>
-            <span className="about__badge-text">Yıllık<br />Tecrübe</span>
+            <span className="about__badge-number">{c('about_badge_number', '25')}</span>
+            <span className="about__badge-text">{c('about_badge_text', 'Yıllık Tecrübe')}</span>
           </div>
         </div>
 
         {/* Right: Text Content */}
         <div className="about__text">
           <blockquote className="about__quote" ref={observe}>
-            "Daha iyi bir dünya, daha yaşanılır bir çevre oluşturma yolculuğumuzda
-            insana dokunan yapılar tasarlıyoruz."
+            "{c('about_quote', 'Daha iyi bir dünya, daha yaşanılır bir çevre oluşturma yolculuğumuzda insana dokunan yapılar tasarlıyoruz.')}"
           </blockquote>
 
           <p className="about__paragraph" ref={observe}>
-            Üçgen Yapı olarak 25 yılı aşkın tecrübemizle Ankara'da inşaat sektörünün
-            öncü firmalarından biri olmanın gururunu taşıyoruz. Geçmiş ve kültürel
-            değerlerden ilham alarak, modern mimariyi doğanın huzuruyla birleştiren
-            yaşam alanları inşa ediyoruz.
+            {c('about_paragraph_1', 'Üçgen Yapı olarak 25 yılı aşkın tecrübemizle Ankara\'da inşaat sektörünün öncü firmalarından biri olmanın gururunu taşıyoruz. Geçmiş ve kültürel değerlerden ilham alarak, modern mimariyi doğanın huzuruyla birleştiren yaşam alanları inşa ediyoruz.')}
           </p>
 
           <p className="about__paragraph" ref={observe}>
-            300'den fazla teslim edilmiş daire, 25'in üzerinde tamamlanmış proje ve
-            her biri özenle tasarlanmış sosyal tesislerimizle, sadece bina değil —
-            yaşam inşa ediyoruz. Havuzundan fitness merkezine, çocuk oyun alanlarından
-            peyzaj düzenlemelerine kadar her detayda kaliteyi hissedebilirsiniz.
+            {c('about_paragraph_2', '300\'den fazla teslim edilmiş daire, 25\'in üzerinde tamamlanmış proje ve her biri özenle tasarlanmış sosyal tesislerimizle, sadece bina değil — yaşam inşa ediyoruz. Havuzundan fitness merkezine, çocuk oyun alanlarından peyzaj düzenlemelerine kadar her detayda kaliteyi hissedebilirsiniz.')}
           </p>
 
           {/* Value Pillars */}
           <div className="about__pillars" ref={observe}>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">Modern Mimari</div>
+              <div className="about__pillar-title">{c('about_pillar_1_title', 'Modern Mimari')}</div>
               <div className="about__pillar-desc">
-                Çağdaş tasarım anlayışıyla işlevsel ve estetik yapılar
+                {c('about_pillar_1_desc', 'Çağdaş tasarım anlayışıyla işlevsel ve estetik yapılar')}
               </div>
             </div>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">Kaliteli Malzeme</div>
+              <div className="about__pillar-title">{c('about_pillar_2_title', 'Kaliteli Malzeme')}</div>
               <div className="about__pillar-desc">
-                A sınıfı malzeme ve son teknoloji yapım yöntemleri
+                {c('about_pillar_2_desc', 'A sınıfı malzeme ve son teknoloji yapım yöntemleri')}
               </div>
             </div>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">Zamanında Teslim</div>
+              <div className="about__pillar-title">{c('about_pillar_3_title', 'Zamanında Teslim')}</div>
               <div className="about__pillar-desc">
-                Taahhüt edilen sürede eksiksiz proje teslimatı
+                {c('about_pillar_3_desc', 'Taahhüt edilen sürede eksiksiz proje teslimatı')}
               </div>
             </div>
             <div className="about__pillar">
               <div className="about__pillar-icon" aria-hidden="true" />
-              <div className="about__pillar-title">Yaşam Odaklı</div>
+              <div className="about__pillar-title">{c('about_pillar_4_title', 'Yaşam Odaklı')}</div>
               <div className="about__pillar-desc">
-                İnsan merkezli, sosyal alanlarla zenginleştirilmiş projeler
+                {c('about_pillar_4_desc', 'İnsan merkezli, sosyal alanlarla zenginleştirilmiş projeler')}
               </div>
             </div>
           </div>

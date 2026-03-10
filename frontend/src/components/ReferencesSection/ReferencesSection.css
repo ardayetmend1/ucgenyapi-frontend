@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+/* ═══════════════════════════════════════
+   ÜÇGEN YAPI — REFERANSLAR SECTION
+   ═══════════════════════════════════════ */
+
+.references {
+  --gold: #C9A84C;
+  --gold-light: #E8D5A3;
+  --charcoal: #1E2A38;
+  --charcoal-deep: #162029;
+  --ivory: #F5F0E8;
+  --ivory-muted: rgba(245, 240, 232, 0.6);
+  --glass: rgba(30, 42, 56, 0.5);
+
+  position: relative;
+  background: var(--charcoal-deep);
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+
+/* ── Background Decorations ── */
+.references__glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+/* ── Header ── */
+.references__header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 24px;
+}
+
+.references__label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.references__label.visible {
+  animation: refRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.references__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--ivory);
+  margin: 0 0 16px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.references__heading.visible {
+  animation: refRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.references__heading em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.references__line {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto;
+  opacity: 0;
+}
+
+.references__line.visible {
+  animation: refRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* ── Logo Grid ── */
+.references__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.references__grid.visible {
+  animation: refRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.references__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 56px;
+  background: var(--glass);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 280px;
+  min-height: 140px;
+}
+
+.references__item:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  background: rgba(30, 42, 56, 0.7);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+}
+
+.references__logo {
+  max-height: 90px;
+  max-width: 240px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.4s ease;
+}
+
+.references__item:hover .references__logo {
+  transform: scale(1.05);
+}
+
+/* ── Animation ── */
+@keyframes refRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .references {
+    padding: 70px 0 60px;
+  }
+
+  .references__grid {
+    gap: 24px;
+  }
+
+  .references__item {
+    padding: 32px 40px;
+    min-width: 220px;
+    min-height: 110px;
+  }
+
+  .references__logo {
+    max-height: 70px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .references__grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .references__item {
+    width: 85%;
+    padding: 28px 32px;
+  }
+}

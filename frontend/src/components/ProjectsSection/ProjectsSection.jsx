@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectsSection.css';
-import projects from '../../data/projects';
+import { fetchProjects, fetchProject } from '../../services/api';
 
 function useRevealRef() {
   const ref = useCallback((el) => {
@@ -21,15 +21,37 @@ function useRevealRef() {
 }
 
 function ProjectsSection() {
-  const [selectedProjectId, setSelectedProjectId] = useState(projects[0].id);
+  const [projectsList, setProjectsList] = useState([]);
+  const [selectedSlug, setSelectedSlug] = useState(null);
+  const [project, setProject] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dis');
+  const [loading, setLoading] = useState(true);
 
-  const project = projects.find((p) => p.id === selectedProjectId);
   const observe = useRevealRef();
 
-  const handleSelectProject = (id) => {
-    setSelectedProjectId(id);
+  // Fetch project list on mount
+  useEffect(() => {
+    fetchProjects().then((data) => {
+      setProjectsList(data);
+      if (data.length > 0) {
+        setSelectedSlug(data[0].slug);
+      }
+    });
+  }, []);
+
+  // Fetch project detail when selection changes
+  useEffect(() => {
+    if (!selectedSlug) return;
+    setLoading(true);
+    fetchProject(selectedSlug).then((data) => {
+      setProject(data);
+      setLoading(false);
+    });
+  }, [selectedSlug]);
+
+  const handleSelectProject = (slug) => {
+    setSelectedSlug(slug);
     setDropdownOpen(false);
     setActiveTab('dis');
   };
@@ -43,6 +65,14 @@ function ProjectsSection() {
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
   }, []);
+
+  if (loading || !project) {
+    return (
+      <section className="projects" id="projeler">
+        <div className="projects__loading">Yükleniyor...</div>
+      </section>
+    );
+  }
 
   const statusClass = project.status === 'Tamamlandı' ? 'done' : 'building';
 
@@ -59,7 +89,7 @@ function ProjectsSection() {
           <em>{project.name.split(' ').slice(-1)}</em>
         </h2>
 
-        {projects.length > 1 && (
+        {projectsList.length > 1 && (
           <div className="projects__selector" ref={observe}>
             <button
               className="projects__selector-btn"
@@ -77,11 +107,11 @@ function ProjectsSection() {
             </button>
 
             <div className={`projects__dropdown ${dropdownOpen ? 'projects__dropdown--open' : ''}`}>
-              {projects.map((p) => (
+              {projectsList.map((p) => (
                 <button
-                  key={p.id}
-                  className={`projects__dropdown-item ${p.id === selectedProjectId ? 'projects__dropdown-item--active' : ''}`}
-                  onClick={() => handleSelectProject(p.id)}
+                  key={p.slug}
+                  className={`projects__dropdown-item ${p.slug === selectedSlug ? 'projects__dropdown-item--active' : ''}`}
+                  onClick={() => handleSelectProject(p.slug)}
                 >
                   <div className="projects__dropdown-item-info">
                     <span className="projects__dropdown-item-name">{p.name}</span>
@@ -114,14 +144,14 @@ function ProjectsSection() {
       {activeTab === 'dis' && (
         <div className="projects__exterior">
           <div className="projects__hero-image" ref={observe}>
-            <img src={project.exterior.heroImage} alt={project.exterior.heroAlt} />
+            <img src={project.hero_image} alt={project.hero_alt} />
             <div className="projects__hero-overlay" />
             <span className="projects__hero-badge">{project.status}</span>
             <span className="projects__hero-title">{project.name}</span>
           </div>
 
           <div className="projects__stats-grid">
-            {project.exterior.stats.map((stat, i) => (
+            {project.stats.map((stat, i) => (
               <div className="projects__stat-card" key={i} ref={observe}>
                 <div className="projects__stat-icon" aria-hidden="true" />
                 <span className="projects__stat-value">{stat.value}</span>
@@ -131,13 +161,13 @@ function ProjectsSection() {
           </div>
 
           <div className="projects__ext-gallery">
-            {project.exterior.gallery.map((item, i) => (
+            {project.gallery_images.map((item, i) => (
               <div className="projects__ext-card" key={i} ref={observe}>
                 <img src={item.image} alt={item.alt} />
                 <div className="projects__ext-card-overlay" />
                 <div className="projects__ext-card-info">
                   <div className="projects__ext-card-title">{item.title}</div>
-                  <div className="projects__ext-card-desc">{item.desc}</div>
+                  <div className="projects__ext-card-desc">{item.description}</div>
                 </div>
               </div>
             ))}
@@ -156,7 +186,7 @@ function ProjectsSection() {
           </div>
 
           <div className="projects__int-gallery">
-            {project.interior.map((room, i) => (
+            {project.interior_rooms.map((room, i) => (
               <div className="projects__int-card" key={i} ref={observe}>
                 <div className="projects__int-card-image">
                   <img src={room.image} alt={room.alt} />
@@ -164,7 +194,7 @@ function ProjectsSection() {
                 <div className="projects__int-card-body">
                   <span className="projects__int-card-tag">{room.tag}</span>
                   <div className="projects__int-card-name">{room.name}</div>
-                  <div className="projects__int-card-desc">{room.desc}</div>
+                  <div className="projects__int-card-desc">{room.description}</div>
                 </div>
               </div>
             ))}
@@ -186,7 +216,7 @@ function ProjectsSection() {
             {project.apartments.map((apt, i) => (
               <div className="projects__apt-card" key={i} ref={observe}>
                 <div className="projects__apt-card-top">
-                  <span className="projects__apt-card-type">{apt.type}</span>
+                  <span className="projects__apt-card-type">{apt.type_code}</span>
                   <div className="projects__apt-card-name">{apt.name}</div>
                 </div>
                 <div className="projects__apt-card-body">
@@ -201,10 +231,9 @@ function ProjectsSection() {
                 </div>
                 <div className="projects__apt-card-footer">
                   <div className="projects__apt-card-status">
-                    <span className={`projects__apt-card-dot ${apt.status === 'limited' ? 'projects__apt-card-dot--limited' : ''}`} />
-                    <span className="projects__apt-card-status-text">{apt.statusText}</span>
+                    <span className={`projects__apt-card-dot projects__apt-card-dot--${apt.status}`} />
+                    <span className="projects__apt-card-status-text">{apt.status_text}</span>
                   </div>
-                  <button className="projects__apt-card-btn">Detay</button>
                 </div>
               </div>
             ))}
@@ -212,16 +241,6 @@ function ProjectsSection() {
         </div>
       )}
 
-      {/* CTA */}
-      <div className="projects__cta" ref={observe}>
-        <div className="projects__cta-text">
-          Hayalinizdeki daireyi birlikte <em>keşfedelim</em>
-        </div>
-        <Link to="/iletisim" className="projects__cta-btn">
-          Randevu Alın
-          <span aria-hidden="true">→</span>
-        </Link>
-      </div>
     </section>
   );
 }

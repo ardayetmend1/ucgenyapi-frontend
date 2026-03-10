@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Contact.css';
-import projects from '../../data/projects';
+import { fetchProjects, submitContact } from '../../services/api';
 import blokHavuz from '../../assets/images/blok-havuz.jpg';
 
 function Contact() {
   const navigate = useNavigate();
+  const [projectsList, setProjectsList] = useState([]);
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -13,18 +14,29 @@ function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetchProjects().then(setProjectsList);
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: '', phone: '', project: '', message: '' });
-    }, 3000);
+    setError('');
+    try {
+      await submitContact(form);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ name: '', phone: '', project: '', message: '' });
+      }, 3000);
+    } catch {
+      setError('Form gönderilemedi. Lütfen tekrar deneyin.');
+    }
   };
 
   return (
@@ -61,6 +73,8 @@ function Contact() {
           </div>
         ) : (
           <form className="contact__form" onSubmit={handleSubmit}>
+            {error && <div className="contact__error">{error}</div>}
+
             <div className="contact__field">
               <label className="contact__field-label" htmlFor="name">
                 Ad Soyad
@@ -108,8 +122,8 @@ function Contact() {
                 <option value="" disabled>
                   Proje seçiniz
                 </option>
-                {projects.map((p) => (
-                  <option key={p.id} value={p.id}>
+                {projectsList.map((p) => (
+                  <option key={p.slug} value={p.name}>
                     {p.name} — {p.location}
                   </option>
                 ))}

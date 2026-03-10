@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './HeroSection.css';
+import { useSiteContent } from '../../context/SiteContentContext';
+import { fetchHeroSlides } from '../../services/api';
 
 import blokHavuz from '../../assets/images/blok-havuz.jpg';
 import blokDetail from '../../assets/images/blok-detail.jpg';
@@ -8,7 +10,7 @@ import arazi from '../../assets/images/arazi.jpg';
 import salon from '../../assets/images/salon.jpg';
 import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
 
-const slides = [
+const fallbackSlides = [
   { src: blokHavuz, alt: 'Üçgen Yapı — Havuz ve Yaşam Alanı' },
   { src: arazi, alt: 'Üçgen Yapı — Proje Kuşbakışı' },
   { src: blokDetail, alt: 'Üçgen Yapı — Bina Detay' },
@@ -18,10 +20,23 @@ const slides = [
 
 function HeroSection() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [slides, setSlides] = useState(fallbackSlides);
+  const c = useSiteContent();
+
+  useEffect(() => {
+    fetchHeroSlides()
+      .then((data) => {
+        if (data.length > 0) {
+          setSlides(data.map((s) => ({ src: s.image, alt: s.alt })));
+          setActiveSlide(0);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const nextSlide = useCallback(() => {
     setActiveSlide((prev) => (prev + 1) % slides.length);
-  }, []);
+  }, [slides.length]);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
@@ -74,19 +89,17 @@ function HeroSection() {
 
       {/* ── Main Content ── */}
       <div className="hero__content">
-        <p className="hero__subtitle">Mimari Mükemmellik · 2024</p>
+        <p className="hero__subtitle">{c('hero_subtitle', 'Mimari Mükemmellik · 2024')}</p>
 
         <h1 className="hero__title">
-          Yaşamın Yeni
+          {c('hero_title_1', 'Yaşamın Yeni')}
           <span className="hero__title-bold">
-            <em>Geometrisi</em>
+            <em>{c('hero_title_2', 'Geometrisi')}</em>
           </span>
         </h1>
 
         <p className="hero__description">
-          Üçgen Yapı olarak, modern mimariyi doğanın huzuruyla birleştiriyoruz.
-          Havuzdan sosyal tesislere, her detayda kaliteyi ve konforu
-          hissedebileceğiniz yaşam alanları inşa ediyoruz.
+          {c('hero_description', 'Üçgen Yapı olarak, modern mimariyi doğanın huzuruyla birleştiriyoruz. Havuzdan sosyal tesislere, her detayda kaliteyi ve konforu hissedebileceğiniz yaşam alanları inşa ediyoruz.')}
         </p>
 
         <div className="hero__actions">
@@ -121,20 +134,20 @@ function HeroSection() {
       {/* ── Stats Bar ── */}
       <div className="hero__stats">
         <div className="hero__stat">
-          <span className="hero__stat-number">4</span>
-          <span className="hero__stat-label">Konut Bloğu</span>
+          <span className="hero__stat-number">{c('hero_stat_1_number', '4')}</span>
+          <span className="hero__stat-label">{c('hero_stat_1_label', 'Konut Bloğu')}</span>
         </div>
         <div className="hero__stat">
-          <span className="hero__stat-number">120+</span>
-          <span className="hero__stat-label">Modern Daire</span>
+          <span className="hero__stat-number">{c('hero_stat_2_number', '120+')}</span>
+          <span className="hero__stat-label">{c('hero_stat_2_label', 'Modern Daire')}</span>
         </div>
         <div className="hero__stat">
-          <span className="hero__stat-number">5★</span>
-          <span className="hero__stat-label">Sosyal Tesis</span>
+          <span className="hero__stat-number">{c('hero_stat_3_number', '5★')}</span>
+          <span className="hero__stat-label">{c('hero_stat_3_label', 'Sosyal Tesis')}</span>
         </div>
         <div className="hero__stat">
-          <span className="hero__stat-number">Hemen</span>
-          <span className="hero__stat-label">Teslim</span>
+          <span className="hero__stat-number">{c('hero_stat_4_number', 'Hemen')}</span>
+          <span className="hero__stat-label">{c('hero_stat_4_label', 'Teslim')}</span>
         </div>
       </div>
     </section>
