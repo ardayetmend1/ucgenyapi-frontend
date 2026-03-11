@@ -177,6 +177,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-left: 28px;
 }
 
 .hero__logo-img {
@@ -195,8 +196,12 @@
   text-transform: uppercase;
 }
 
-.hero__logo-text span {
-  color: var(--gold);
+.hero__logo-green {
+  color: #22C55E;
+}
+
+.hero__logo-blue {
+  color: #3B82F6;
 }
 
 .hero__nav-links {

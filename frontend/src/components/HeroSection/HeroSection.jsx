@@ -13,7 +13,7 @@ import blokDetail from '../../assets/images/blok-detail.jpg';
 import arazi from '../../assets/images/arazi.jpg';
 import salon from '../../assets/images/salon.jpg';
 import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
-import ucgenLogo from '../../assets/images/logo03.jpg';
+import ucgenLogo from '../../assets/images/ucgenlogom.jpg';
 
 const fallbackSlides = [
   { src: blokHavuz, alt: 'Üçgen Yapı — Havuz ve Yaşam Alanı' },
@@ -115,7 +115,7 @@ function HeroSection() {
         <div className="hero__logo">
           <img className="hero__logo-img" src={ucgenLogo} alt="Üçgen Yapı" />
           <div className="hero__logo-text">
-            <span>Üçgen</span> Yapı
+            <span className="hero__logo-green">Üçgen</span> <span className="hero__logo-blue">Yapı</span>
           </div>
         </div>
 
