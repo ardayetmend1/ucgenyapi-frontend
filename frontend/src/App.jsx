@@ -6,6 +6,7 @@ import ProjectsSection from './components/ProjectsSection/ProjectsSection';
 import ReferencesSection from './components/ReferencesSection/ReferencesSection';
 import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact';
+import MimarlikHizmetlerimiz from './pages/MimarlikHizmetlerimiz/MimarlikHizmetlerimiz';
 
 function HomePage() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/iletisim" element={<Contact />} />
+          <Route path="/mimarlik-hizmetlerimiz" element={<MimarlikHizmetlerimiz />} />
         </Routes>
       </BrowserRouter>
     </SiteContentProvider>

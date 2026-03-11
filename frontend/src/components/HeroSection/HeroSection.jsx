@@ -81,7 +81,7 @@ function HeroSection() {
         <ul className="hero__nav-links">
           <li><a href="#projeler">Projeler</a></li>
           <li><a href="#hakkimizda">Hakkımızda</a></li>
-          <li><a href="#galeri">Galeri</a></li>
+          <li><Link to="/mimarlik-hizmetlerimiz">Mimarlık Hizmetlerimiz</Link></li>
           <li><Link to="/iletisim">İletişim</Link></li>
         </ul>
 
