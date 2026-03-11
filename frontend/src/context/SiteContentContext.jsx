@@ -2,11 +2,12 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import { fetchSiteContent } from '../services/api';
 
 const SiteContentContext = createContext({});
+const SiteContentReloadContext = createContext(() => {});
 
 export function SiteContentProvider({ children }) {
   const [content, setContent] = useState({});
 
-  useEffect(() => {
+  const load = useCallback(() => {
     fetchSiteContent()
       .then((data) => {
         const map = {};
@@ -15,10 +16,10 @@ export function SiteContentProvider({ children }) {
         });
         setContent(map);
       })
-      .catch(() => {
-        // API kapalıysa fallback değerler kullanılacak
-      });
+      .catch(() => {});
   }, []);
+
+  useEffect(() => { load(); }, [load]);
 
   const c = useCallback(
     (key, fallback = '') => content[key] || fallback,
@@ -27,11 +28,17 @@ export function SiteContentProvider({ children }) {
 
   return (
     <SiteContentContext.Provider value={c}>
-      {children}
+      <SiteContentReloadContext.Provider value={load}>
+        {children}
+      </SiteContentReloadContext.Provider>
     </SiteContentContext.Provider>
   );
 }
 
 export function useSiteContent() {
   return useContext(SiteContentContext);
+}
+
+export function useSiteContentReload() {
+  return useContext(SiteContentReloadContext);
 }

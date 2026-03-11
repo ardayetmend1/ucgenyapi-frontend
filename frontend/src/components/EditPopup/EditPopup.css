@@ -1,0 +1,139 @@
+/* ── Editable Wrapper ── */
+.editable-wrap {
+  position: relative;
+}
+
+.editable-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 60;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 168, 76, 0.85);
+  color: #162029;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.editable-wrap:hover .editable-icon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.editable-icon:hover {
+  transform: scale(1.15);
+  background: #C9A84C;
+}
+
+/* ── Edit Popup ── */
+.edit-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  min-width: 280px;
+  max-width: 380px;
+  background: #1E2A38;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  animation: editPopIn 0.2s ease;
+}
+
+@keyframes editPopIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.edit-popup__field {
+  margin-bottom: 10px;
+}
+
+.edit-popup__field label {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.edit-popup__field input,
+.edit-popup__field textarea {
+  width: 100%;
+  background: #162029;
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  padding: 8px 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: #F5F0E8;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.edit-popup__field input:focus,
+.edit-popup__field textarea:focus {
+  border-color: #C9A84C;
+}
+
+.edit-popup__actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.edit-popup__btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  padding: 6px 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-popup__btn--save {
+  background: #C9A84C;
+  color: #162029;
+  flex: 1;
+}
+
+.edit-popup__btn--save:hover {
+  background: #E8D5A3;
+}
+
+.edit-popup__btn--delete {
+  background: transparent;
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  color: #e74c3c;
+}
+
+.edit-popup__btn--delete:hover {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.edit-popup__btn--cancel {
+  background: transparent;
+  color: rgba(245, 240, 232, 0.5);
+  padding: 6px 10px;
+}
+
+.edit-popup__btn--cancel:hover {
+  color: #F5F0E8;
+}
+
+.edit-popup__btn:disabled {
+  opacity: 0.5;
+}

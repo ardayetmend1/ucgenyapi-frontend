@@ -559,6 +559,15 @@
   width: 80%;
 }
 
+.mh__card--add {
+  border-style: dashed;
+  border-color: rgba(201, 168, 76, 0.25);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Shimmer sweep across cards */
 .mh__card::before {
   content: '';

@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:7109/api';
 
 export async function fetchProjects() {
   const res = await fetch(`${API_URL}/projects/`);
@@ -43,5 +43,48 @@ export async function fetchAboutImages() {
 export async function fetchReferences() {
   const res = await fetch(`${API_URL}/references/`);
   if (!res.ok) throw new Error('Referanslar yüklenemedi');
+  return res.json();
+}
+
+export async function fetchArchitectureGalleryImages() {
+  const res = await fetch(`${API_URL}/architecture-gallery-images/`);
+  if (!res.ok) throw new Error('Mimarlık görselleri yüklenemedi');
+  return res.json();
+}
+
+export async function fetchArchitectureServices() {
+  const res = await fetch(`${API_URL}/architecture-services/`);
+  if (!res.ok) throw new Error('Mimarlık hizmetleri yüklenemedi');
+  return res.json();
+}
+
+// ── Auth ──
+export async function registerUser(data) {
+  const res = await fetch(`${API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.errors?.join(', ') || 'Kayıt başarısız');
+  return json;
+}
+
+export async function loginUser(data) {
+  const res = await fetch(`${API_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || 'Giriş başarısız');
+  return json;
+}
+
+export async function fetchMe(token) {
+  const res = await fetch(`${API_URL}/auth/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Oturum doğrulanamadı');
   return res.json();
 }

@@ -761,6 +761,7 @@
   transform: scale(1);
 }
 
+/* ── Admin Image Edit Hint ── */.about__image-edit-hint {  position: absolute;  inset: 0;  display: flex;  align-items: center;  justify-content: center;  background: rgba(0, 0, 0, 0.5);  color: #C9A84C;  font-family: 'Outfit', sans-serif;  font-size: 0.85rem;  font-weight: 500;  letter-spacing: 0.1em;  text-transform: uppercase;  opacity: 0;  transition: opacity 0.3s;  z-index: 5;  cursor: pointer;}.about__image:hover .about__image-edit-hint {  opacity: 1;}.about__editable-image {  display: contents;}
 /* ── Lightbox ── */
 .about__lightbox {
   position: fixed;

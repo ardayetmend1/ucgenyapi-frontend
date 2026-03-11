@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectsSection.css';
 import { fetchProjects, fetchProject } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
+import { Editable } from '../EditPopup/EditPopup';
+import { updateProject } from '../../services/adminApi';
 
 function useRevealRef() {
   const ref = useCallback((el) => {
@@ -20,6 +23,14 @@ function useRevealRef() {
   return ref;
 }
 
+const projectFields = [
+  { key: 'name', label: 'Proje Adı', type: 'text' },
+  { key: 'status', label: 'Durum', type: 'text' },
+  { key: 'location', label: 'Konum', type: 'text' },
+  { key: 'hero_image', label: 'Hero Görsel URL', type: 'text' },
+  { key: 'hero_alt', label: 'Hero Alt Metin', type: 'text' },
+];
+
 function ProjectsSection() {
   const [projectsList, setProjectsList] = useState([]);
   const [selectedSlug, setSelectedSlug] = useState(null);
@@ -27,10 +38,11 @@ function ProjectsSection() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dis');
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'Admin';
 
   const observe = useRevealRef();
 
-  // Fetch project list on mount
   useEffect(() => {
     fetchProjects().then((data) => {
       setProjectsList(data);
@@ -40,8 +52,7 @@ function ProjectsSection() {
     });
   }, []);
 
-  // Fetch project detail when selection changes
-  useEffect(() => {
+  const loadProject = useCallback(() => {
     if (!selectedSlug) return;
     setLoading(true);
     fetchProject(selectedSlug).then((data) => {
@@ -49,6 +60,8 @@ function ProjectsSection() {
       setLoading(false);
     });
   }, [selectedSlug]);
+
+  useEffect(() => { loadProject(); }, [loadProject]);
 
   const handleSelectProject = (slug) => {
     setSelectedSlug(slug);
@@ -66,9 +79,14 @@ function ProjectsSection() {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
+  const handleUpdateProject = async (form) => {
+    await updateProject(project.id, form);
+    loadProject();
+  };
+
   if (loading || !project) {
     return (
-      <section className="projects" id="projeler">
+      <section className="projects" id="projeler" style={{ position: "relative" }}>
         <div className="projects__loading">Yükleniyor...</div>
       </section>
     );
@@ -77,17 +95,30 @@ function ProjectsSection() {
   const statusClass = project.status === 'Tamamlandı' ? 'done' : 'building';
 
   return (
-    <section className="projects" id="projeler">
+    <section className="projects" id="projeler" style={{ position: "relative" }}>
       <div className="projects__deco-triangle projects__deco-triangle--1" />
       <div className="projects__deco-triangle projects__deco-triangle--2" />
 
       {/* Header */}
       <div className="projects__header">
         <span className="projects__label" ref={observe}>Projelerimiz</span>
-        <h2 className="projects__heading" ref={observe}>
-          {project.name.split(' ').slice(0, -1).join(' ')}{' '}
-          <em>{project.name.split(' ').slice(-1)}</em>
-        </h2>
+        <Editable
+          isAdmin={isAdmin}
+          fields={projectFields}
+          values={{
+            name: project.name,
+            status: project.status,
+            location: project.location || '',
+            hero_image: project.hero_image,
+            hero_alt: project.hero_alt,
+          }}
+          onSave={handleUpdateProject}
+        >
+          <h2 className="projects__heading" ref={observe}>
+            {project.name.split(' ').slice(0, -1).join(' ')}{' '}
+            <em>{project.name.split(' ').slice(-1)}</em>
+          </h2>
+        </Editable>
 
         {projectsList.length > 1 && (
           <div className="projects__selector" ref={observe}>

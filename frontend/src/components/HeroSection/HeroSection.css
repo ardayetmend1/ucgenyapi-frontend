@@ -151,17 +151,26 @@
 
 /* ── Navigation ── */
 .hero__nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 28px 60px;
   opacity: 0;
   animation: fadeDown 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+.hero__nav--scrolled {
+  background: rgba(22, 32, 41, 0.95);
+  backdrop-filter: blur(12px);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .hero__logo {
@@ -227,6 +236,107 @@
 
 .hero__nav-links a:hover::after {
   width: 100%;
+}
+
+/* ── Nav Right Group ── */
+.hero__nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero__user-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 240, 232, 0.2);
+  background: transparent;
+  color: var(--ivory-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero__user-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.hero__user-btn--logged {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── User Dropdown ── */
+.hero__user-menu {
+  position: relative;
+}
+
+.hero__user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: var(--charcoal);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 20;
+}
+
+.hero__user-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ivory);
+}
+
+.hero__user-role {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  margin-bottom: 4px;
+}
+
+.hero__user-admin {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 4px 0;
+  display: block;
+  transition: color 0.2s;
+}
+
+.hero__user-admin:hover {
+  color: var(--gold-light);
+}
+
+.hero__user-logout {
+  background: none;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--ivory-muted);
+  cursor: pointer;
+  text-align: left;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.hero__user-logout:hover {
+  color: #e74c3c;
 }
 
 .hero__nav-cta {
