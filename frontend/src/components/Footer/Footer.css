@@ -48,25 +48,10 @@
   gap: 12px;
 }
 
-.footer__logo-icon {
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 24px solid #C9A84C;
-}
-
-.footer__logo-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: #F5F0E8;
-  letter-spacing: 0.05em;
-}
-
-.footer__logo-text span {
-  color: #C9A84C;
-  font-weight: 600;
+.footer__logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 
 .footer__slogan {

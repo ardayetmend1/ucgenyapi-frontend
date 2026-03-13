@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 import { useSiteContent } from '../../context/SiteContentContext';
 import { fetchProjects } from '../../services/api';
+import ucgenLogo from '../../../görseller/logoucgen.jpeg';
 
 function Footer() {
   const c = useSiteContent();
@@ -20,10 +21,7 @@ function Footer() {
         {/* Logo & Slogan */}
         <div className="footer__brand">
           <div className="footer__logo">
-            <div className="footer__logo-icon" aria-hidden="true" />
-            <div className="footer__logo-text">
-              <span>Üçgen</span> Yapı
-            </div>
+            <img src={ucgenLogo} alt="3Gen Yapı" className="footer__logo-img" />
           </div>
           <p className="footer__slogan">
             {c('footer_slogan', 'Modern mimariyi doğanın huzuruyla birleştiriyoruz. 25 yılı aşkın tecrübemizle yaşam alanları inşa ediyoruz.')}
