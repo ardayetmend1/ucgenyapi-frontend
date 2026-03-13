@@ -34,6 +34,7 @@ function HeroSection() {
   const [dbSlides, setDbSlides] = useState([]);
   const [authOpen, setAuthOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const c = useSiteContent();
   const reloadContent = useSiteContentReload();
@@ -124,6 +125,15 @@ function HeroSection() {
         </ul>
 
         <div className="hero__nav-right">
+          <button
+            className={`hero__hamburger ${mobileMenuOpen ? 'hero__hamburger--open' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Menü"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           {user ? (
             <div className="hero__user-menu">
               <button className="hero__user-btn hero__user-btn--logged" onClick={() => setUserMenuOpen(!userMenuOpen)} title={user.firstName}>
@@ -150,6 +160,19 @@ function HeroSection() {
           <Link to="/iletisim" className="hero__nav-cta">Randevu Al</Link>
         </div>
       </nav>
+
+      {/* ── Mobile Menu ── */}
+      {mobileMenuOpen && (
+        <div className="hero__mobile-menu" onClick={() => setMobileMenuOpen(false)}>
+          <div className="hero__mobile-menu-content" onClick={(e) => e.stopPropagation()}>
+            <a href="#projeler" onClick={() => setMobileMenuOpen(false)}>Projeler</a>
+            <a href="#hakkimizda" onClick={() => setMobileMenuOpen(false)}>Hakkımızda</a>
+            <Link to="/mimarlik-hizmetlerimiz" onClick={() => setMobileMenuOpen(false)}>Mimarlık Hizmetlerimiz</Link>
+            <Link to="/iletisim" onClick={() => setMobileMenuOpen(false)}>İletişim</Link>
+            <Link to="/iletisim" className="hero__mobile-menu-cta" onClick={() => setMobileMenuOpen(false)}>Randevu Al</Link>
+          </div>
+        </div>
+      )}
 
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
 

@@ -704,6 +704,14 @@
     display: none;
   }
 
+  .hero__nav-cta {
+    display: none;
+  }
+
+  .hero__hamburger {
+    display: flex !important;
+  }
+
   .hero__content {
     padding: 0 24px 100px 24px;
     justify-content: flex-end;
@@ -755,6 +763,99 @@
   .hero__line--left {
     display: none;
   }
+}
+
+/* ── Hamburger Button ── */
+.hero__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.hero__hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #F5F0E8;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hero__hamburger--open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hero__hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hero__hamburger--open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ── Mobile Menu Overlay ── */
+.hero__mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(14, 23, 31, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: mobileMenuFadeIn 0.25s ease;
+}
+
+@keyframes mobileMenuFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero__mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.hero__mobile-menu-content a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #F5F0E8;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+
+.hero__mobile-menu-content a:hover {
+  color: #C9A84C;
+}
+
+.hero__mobile-menu-cta {
+  margin-top: 12px;
+  padding: 14px 36px;
+  border: 1px solid #C9A84C;
+  color: #C9A84C !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.85rem !important;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.hero__mobile-menu-cta:hover {
+  background: #C9A84C;
+  color: #162029 !important;
 }
 
 /* ── Reduced Motion ── */
