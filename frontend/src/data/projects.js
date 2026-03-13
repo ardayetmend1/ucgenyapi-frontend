@@ -6,6 +6,13 @@ import salon from '../assets/images/salon.jpg';
 import mutfak from '../assets/images/mutfak.jpg';
 import yatakOdasi from '../assets/images/yatak-odasi.jpg';
 import bonus from '../assets/images/bonus.jpg';
+import aydinliArazi from '../assets/images/aydinli-arazi.jpg';
+import aydinliBlok from '../assets/images/aydinli-blok.jpg';
+import aydinliBlok2 from '../assets/images/aydinli-blok2.jpg';
+import aydinliBonus from '../assets/images/aydinli-bonus.jpg';
+import aydinliSalon from '../assets/images/aydinli-salon.jpg';
+import aydinliMutfak from '../assets/images/aydinli-mutfak.jpg';
+import aydinliYatakOdasi from '../assets/images/aydinli-yatak-odasi.jpg';
 
 /**
  * PROJE VERİLERİ
@@ -221,6 +228,110 @@ const projects = [
         ],
         status: 'available',
         statusText: 'Müsait',
+      },
+    ],
+  },
+  {
+    id: 'aydinli-konaklari',
+    name: 'Aydınlı Konakları',
+    location: 'Törekent / Ankara',
+    status: 'Tamamlandı',
+    year: '2020',
+
+    // ── Dış Mekan ──
+    exterior: {
+      heroImage: aydinliArazi,
+      heroAlt: 'Aydınlı Konakları — Kuşbakışı Görünüm',
+      stats: [
+        { value: '12.347', title: 'm² Arazi Alanı' },
+        { value: '167', title: 'Bağımsız Bölüm' },
+        { value: '5', title: 'Kat Sayısı' },
+        { value: '4', title: 'Konut Bloğu' },
+      ],
+      gallery: [
+        {
+          image: aydinliBlok,
+          alt: 'A-B Blok Görünüm',
+          title: 'Dış Mekan',
+          desc: 'Modern mimari çizgilerle tasarlanmış konut blokları ve çevre düzenlemesi',
+        },
+        {
+          image: aydinliBonus,
+          alt: 'Sosyal Alan',
+          title: 'Dış Mekan',
+          desc: 'Yeşil alanlar ve sosyal yaşam alanlarıyla zenginleştirilmiş site çevresi',
+        },
+      ],
+    },
+
+    // ── İç Mekan ──
+    interior: [
+      {
+        image: aydinliSalon,
+        alt: 'Modern Salon',
+        tag: 'Yaşam Alanı',
+        name: 'Ferah Salon',
+        desc: 'Geniş pencerelerle aydınlık, modern tasarım çizgileri ve premium zemin kaplama ile lüks bir yaşam deneyimi.',
+      },
+      {
+        image: aydinliMutfak,
+        alt: 'Modern Mutfak',
+        tag: 'Mutfak',
+        name: 'Ankastre Mutfak',
+        desc: 'Tam donanımlı ankastre beyaz eşya, granit tezgah ve ergonomik dolap sistemi ile fonksiyonel mutfak.',
+      },
+      {
+        image: aydinliYatakOdasi,
+        alt: 'Yatak Odası',
+        tag: 'Yatak Odası',
+        name: 'Master Yatak Odası',
+        desc: 'Giyinme odası, en-suite banyo bağlantısı ve sessiz ortam için yalıtımlı duvar sistemi.',
+      },
+    ],
+
+    // ── Daire Seçenekleri ──
+    apartments: [
+      {
+        type: 'Tip A',
+        name: '2+1 Daire',
+        features: [
+          { label: 'Brüt Alan', value: '95 m²' },
+          { label: 'Net Alan', value: '80 m²' },
+          { label: 'Oda Sayısı', value: '2 + 1' },
+          { label: 'Banyo', value: '1' },
+          { label: 'Balkon', value: '1 Adet' },
+          { label: 'Isıtma', value: 'Yerden Isıtma' },
+        ],
+        status: 'available',
+        statusText: 'Müsait',
+      },
+      {
+        type: 'Tip B',
+        name: '3+1 Daire',
+        features: [
+          { label: 'Brüt Alan', value: '135 m²' },
+          { label: 'Net Alan', value: '115 m²' },
+          { label: 'Oda Sayısı', value: '3 + 1' },
+          { label: 'Banyo', value: '2' },
+          { label: 'Balkon', value: '2 Adet' },
+          { label: 'Isıtma', value: 'Yerden Isıtma' },
+        ],
+        status: 'limited',
+        statusText: 'Son Birkaç',
+      },
+      {
+        type: 'Tip C',
+        name: '4+1 Daire',
+        features: [
+          { label: 'Brüt Alan', value: '175 m²' },
+          { label: 'Net Alan', value: '150 m²' },
+          { label: 'Oda Sayısı', value: '4 + 1' },
+          { label: 'Banyo', value: '2' },
+          { label: 'Balkon', value: '2 Adet' },
+          { label: 'Isıtma', value: 'Yerden Isıtma' },
+        ],
+        status: 'sold',
+        statusText: 'Hepsi Satıldı',
       },
     ],
   },

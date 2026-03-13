@@ -1,13 +1,13 @@
 const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:7109/api';
 
 export async function fetchProjects() {
-  const res = await fetch(`${API_URL}/projects/`);
+  const res = await fetch(`${API_URL}/projects`);
   if (!res.ok) throw new Error('Projeler yüklenemedi');
   return res.json();
 }
 
 export async function fetchProject(slug) {
-  const res = await fetch(`${API_URL}/projects/${slug}/`);
+  const res = await fetch(`${API_URL}/projects/${slug}`);
   if (!res.ok) throw new Error('Proje bulunamadı');
   return res.json();
 }

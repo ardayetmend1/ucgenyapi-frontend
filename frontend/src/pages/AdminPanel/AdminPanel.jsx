@@ -297,19 +297,23 @@ function ProjectsManager({ data, onDelete, onReload }) {
   const [editingProject, setEditingProject] = useState(null);
   const [projectDetail, setProjectDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [detailError, setDetailError] = useState('');
   const [activeTab, setActiveTab] = useState('info');
   const [creating, setCreating] = useState(false);
   const [newForm, setNewForm] = useState({ name: '', slug: '', location: '', year: '', status: '', heroImageUrl: '', heroAlt: '', order: 0 });
 
   const openProject = async (project) => {
     setDetailLoading(true);
+    setDetailError('');
     setActiveTab('info');
     try {
       const detail = await admin.getProjectDetail(project.id);
       setProjectDetail(detail);
       setEditingProject(project);
-    } catch {
+    } catch (err) {
       setProjectDetail(null);
+      setEditingProject(null);
+      setDetailError(err.message || 'Proje detayları yüklenemedi.');
     } finally {
       setDetailLoading(false);
     }
@@ -407,6 +411,7 @@ function ProjectsManager({ data, onDelete, onReload }) {
         </div>
       )}
 
+      {detailError && <div className="admin__error">{detailError}</div>}
       {detailLoading ? (
         <p className="admin__loading">Proje yükleniyor...</p>
       ) : (

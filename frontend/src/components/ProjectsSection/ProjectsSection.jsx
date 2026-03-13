@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectsSection.css';
 import { fetchProjects, fetchProject } from '../../services/api';
@@ -31,6 +31,11 @@ const projectFields = [
   { key: 'hero_alt', label: 'Hero Alt Metin', type: 'text' },
 ];
 
+const REVEAL_SELECTORS =
+  '.projects__label,.projects__heading,.projects__selector,.projects__heading-line,' +
+  '.projects__hero-image,.projects__stat-card,.projects__ext-card,' +
+  '.projects__interior-header,.projects__int-card,.projects__apt-header,.projects__apt-card,.projects__cta';
+
 function ProjectsSection() {
   const [projectsList, setProjectsList] = useState([]);
   const [selectedSlug, setSelectedSlug] = useState(null);
@@ -38,37 +43,80 @@ function ProjectsSection() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dis');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { user } = useAuth();
   const isAdmin = user?.role === 'Admin';
+  const isFirstLoad = useRef(true);
 
   const observe = useRevealRef();
 
-  useEffect(() => {
-    fetchProjects().then((data) => {
-      setProjectsList(data);
-      if (data.length > 0) {
-        setSelectedSlug(data[0].slug);
-      }
+  // Force all reveal elements visible (used after project switch)
+  const forceRevealVisible = () => {
+    requestAnimationFrame(() => {
+      const section = document.getElementById('projeler');
+      if (!section) return;
+      section.querySelectorAll(REVEAL_SELECTORS).forEach((el) => {
+        el.classList.add('visible');
+      });
     });
-  }, []);
+  };
 
-  const loadProject = useCallback(() => {
-    if (!selectedSlug) return;
-    setLoading(true);
-    fetchProject(selectedSlug).then((data) => {
+  // Track latest requested slug to prevent race conditions
+  const latestSlugRef = useRef(null);
+
+  // Load a single project by slug
+  const loadProjectBySlug = async (slug, isSwitch = false) => {
+    latestSlugRef.current = slug;
+    try {
+      setError(null);
+      const data = await fetchProject(slug);
+      // Only apply if this is still the latest request (prevent race conditions)
+      if (latestSlugRef.current !== slug) return;
       setProject(data);
       setLoading(false);
-    });
-  }, [selectedSlug]);
+      if (isSwitch) {
+        forceRevealVisible();
+      }
+      isFirstLoad.current = false;
+    } catch (err) {
+      if (latestSlugRef.current !== slug) return;
+      console.error('Proje yüklenemedi:', slug, err);
+      setError(err.message || 'Proje yüklenemedi');
+      setLoading(false);
+    }
+  };
 
-  useEffect(() => { loadProject(); }, [loadProject]);
+  // Initial load: get project list, then load first project
+  const didInit = useRef(false);
+  useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
+    fetchProjects()
+      .then((data) => {
+        setProjectsList(data);
+        if (data.length > 0) {
+          setSelectedSlug(data[0].slug);
+          loadProjectBySlug(data[0].slug, false);
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        setError('Projeler yüklenemedi');
+        setLoading(false);
+      });
+  }, []);
 
+  // User clicks a different project in dropdown
   const handleSelectProject = (slug) => {
+    if (slug === selectedSlug) return;
     setSelectedSlug(slug);
     setDropdownOpen(false);
     setActiveTab('dis');
+    loadProjectBySlug(slug, true);
   };
 
+  // Close dropdown on outside click
   useEffect(() => {
     const handleClick = (e) => {
       if (!e.target.closest('.projects__selector')) {
@@ -79,15 +127,26 @@ function ProjectsSection() {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
+  // Admin edit handler
   const handleUpdateProject = async (form) => {
     await updateProject(project.id, form);
-    loadProject();
+    loadProjectBySlug(selectedSlug, false);
   };
 
-  if (loading || !project) {
+  if (loading) {
     return (
       <section className="projects" id="projeler" style={{ position: "relative" }}>
         <div className="projects__loading">Yükleniyor...</div>
+      </section>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <section className="projects" id="projeler" style={{ position: "relative" }}>
+        <div className="projects__loading" style={{ color: '#e53935' }}>
+          {error || 'Proje bulunamadı'}
+        </div>
       </section>
     );
   }
