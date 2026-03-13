@@ -115,6 +115,7 @@
 
 .auth-modal__row .auth-modal__field {
   flex: 1;
+  min-width: 0;
 }
 
 .auth-modal__field {
@@ -142,6 +143,8 @@
   color: var(--ivory);
   outline: none;
   transition: border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .auth-modal__field input::placeholder {
