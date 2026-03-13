@@ -950,6 +950,45 @@
   }
 }
 
+/* ── Switching Overlay ── */
+.projects__switching-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(22, 32, 41, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: projectsFadeIn 0.2s ease;
+}
+
+.projects__switching-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(201, 168, 76, 0.2);
+  border-top-color: #C9A84C;
+  border-radius: 50%;
+  animation: projectsSpin 0.8s linear infinite;
+}
+
+@keyframes projectsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes projectsSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Loading ── */
+.projects__loading {
+  text-align: center;
+  padding: 120px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: rgba(245, 240, 232, 0.5);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .projects *, .projects *::before, .projects *::after {
     animation-duration: 0.01ms !important;

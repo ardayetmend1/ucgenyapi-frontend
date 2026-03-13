@@ -43,6 +43,7 @@ function ProjectsSection() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dis');
   const [loading, setLoading] = useState(true);
+  const [switching, setSwitching] = useState(false);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const isAdmin = user?.role === 'Admin';
@@ -74,6 +75,7 @@ function ProjectsSection() {
       if (latestSlugRef.current !== slug) return;
       setProject(data);
       setLoading(false);
+      setSwitching(false);
       if (isSwitch) {
         forceRevealVisible();
       }
@@ -83,6 +85,7 @@ function ProjectsSection() {
       console.error('Proje yüklenemedi:', slug, err);
       setError(err.message || 'Proje yüklenemedi');
       setLoading(false);
+      setSwitching(false);
     }
   };
 
@@ -113,6 +116,7 @@ function ProjectsSection() {
     setSelectedSlug(slug);
     setDropdownOpen(false);
     setActiveTab('dis');
+    setSwitching(true);
     loadProjectBySlug(slug, true);
   };
 
@@ -217,8 +221,15 @@ function ProjectsSection() {
         <span className="projects__heading-line" ref={observe} />
       </div>
 
+      {/* Loading overlay during project switch */}
+      {switching && (
+        <div className="projects__switching-overlay">
+          <div className="projects__switching-spinner" />
+        </div>
+      )}
+
       {/* Tabs */}
-      <div className="projects__tabs">
+      <div className="projects__tabs" key={`tabs-${project.slug}`}>
         {['dis', 'ic', 'daire'].map((tab) => (
           <button
             key={tab}
@@ -232,7 +243,7 @@ function ProjectsSection() {
 
       {/* DIS ALAN */}
       {activeTab === 'dis' && (
-        <div className="projects__exterior">
+        <div className="projects__exterior" key={`dis-${project.slug}`}>
           <div className="projects__hero-image" ref={observe}>
             <img src={project.hero_image} alt={project.hero_alt} />
             <div className="projects__hero-overlay" />
@@ -267,7 +278,7 @@ function ProjectsSection() {
 
       {/* IC ALAN */}
       {activeTab === 'ic' && (
-        <div className="projects__interior">
+        <div className="projects__interior" key={`ic-${project.slug}`}>
           <div className="projects__interior-header" ref={observe}>
             <h3 className="projects__interior-title">
               Yaşam <em>Alanları</em>
@@ -294,7 +305,7 @@ function ProjectsSection() {
 
       {/* DAIRE SECENEKLERI */}
       {activeTab === 'daire' && (
-        <div className="projects__apartments">
+        <div className="projects__apartments" key={`daire-${project.slug}`}>
           <div className="projects__apt-header" ref={observe}>
             <h3 className="projects__apt-title">
               Daire <em>Seçenekleri</em>
