@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { registerUser, loginUser } from '../../services/api';
+import { registerUser, loginUser, forgotPassword } from '../../services/api';
 import './AuthModal.css';
 
 function AuthModal({ isOpen, onClose }) {
@@ -8,6 +8,7 @@ function AuthModal({ isOpen, onClose }) {
   const [tab, setTab] = useState('login');
   const [form, setForm] = useState({ email: '', password: '', firstName: '', lastName: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
 
@@ -16,6 +17,25 @@ function AuthModal({ isOpen, onClose }) {
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setError('');
+    setSuccess('');
+  };
+
+  const handleForgotPassword = async () => {
+    if (!form.email) {
+      setError('Lütfen e-posta adresinizi girin.');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    setSuccess('');
+    try {
+      await forgotPassword(form.email);
+      setSuccess('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -50,6 +70,7 @@ function AuthModal({ isOpen, onClose }) {
   const switchTab = (newTab) => {
     setTab(newTab);
     setError('');
+    setSuccess('');
     setForm({ email: '', password: '', firstName: '', lastName: '' });
     setAgreed(false);
   };
@@ -136,6 +157,17 @@ function AuthModal({ isOpen, onClose }) {
             />
           </div>
 
+          {tab === 'login' && (
+            <button
+              type="button"
+              className="auth-modal__forgot"
+              onClick={handleForgotPassword}
+              disabled={loading}
+            >
+              Şifremi Unuttum
+            </button>
+          )}
+
           {tab === 'register' && (
             <label className="auth-modal__checkbox">
               <input
@@ -148,6 +180,7 @@ function AuthModal({ isOpen, onClose }) {
           )}
 
           {error && <p className="auth-modal__error">{error}</p>}
+          {success && <p className="auth-modal__success">{success}</p>}
 
           <button className="auth-modal__submit" type="submit" disabled={loading}>
             {loading ? 'Yükleniyor...' : tab === 'login' ? 'Giriş Yap' : 'Üye Ol'}

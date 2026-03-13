@@ -179,6 +179,42 @@
   line-height: 1.4;
 }
 
+/* ── Forgot Password ── */
+.auth-modal__forgot {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  cursor: pointer;
+  text-align: right;
+  padding: 0;
+  margin-top: -10px;
+  transition: color 0.2s;
+}
+
+.auth-modal__forgot:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+.auth-modal__forgot:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Success ── */
+.auth-modal__success {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  color: #2ecc71;
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
 /* ── Error ── */
 .auth-modal__error {
   font-family: 'Outfit', sans-serif;

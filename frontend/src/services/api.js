@@ -88,3 +88,25 @@ export async function fetchMe(token) {
   if (!res.ok) throw new Error('Oturum doğrulanamadı');
   return res.json();
 }
+
+export async function forgotPassword(email) {
+  const res = await fetch(`${API_URL}/auth/forgot-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || 'İşlem başarısız');
+  return json;
+}
+
+export async function resetPassword(email, token, newPassword) {
+  const res = await fetch(`${API_URL}/auth/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, token, newPassword }),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || 'Şifre sıfırlanamadı');
+  return json;
+}

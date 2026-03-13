@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact';
 import MimarlikHizmetlerimiz from './pages/MimarlikHizmetlerimiz/MimarlikHizmetlerimiz';
 import AdminPanel from './pages/AdminPanel/AdminPanel';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 
 function HomePage() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/iletisim" element={<Contact />} />
             <Route path="/mimarlik-hizmetlerimiz" element={<MimarlikHizmetlerimiz />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/sifre-sifirla" element={<ResetPassword />} />
           </Routes>
         </BrowserRouter>
       </SiteContentProvider>
