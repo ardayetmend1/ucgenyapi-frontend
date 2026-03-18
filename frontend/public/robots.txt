@@ -1,0 +1,10 @@
+# Üçgen Yapı - robots.txt
+User-agent: *
+Allow: /
+Allow: /iletisim
+Allow: /mimarlik-hizmetlerimiz
+
+Disallow: /admin
+Disallow: /sifre-sifirla
+
+Sitemap: https://3genyapi.com.tr/sitemap.xml

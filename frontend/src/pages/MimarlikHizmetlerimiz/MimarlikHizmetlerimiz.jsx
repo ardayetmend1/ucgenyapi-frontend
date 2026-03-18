@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../components/SEO/SEO';
 import './MimarlikHizmetlerimiz.css';
 import { fetchArchitectureGalleryImages, fetchArchitectureServices } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -155,6 +156,7 @@ function MimarlikHizmetlerimiz() {
 
   return (
     <div className="mh">
+      <SEO path="/mimarlik-hizmetlerimiz" />
       {/* ── Hero Section ── */}
       <section className="mh__hero">
         <img className="mh__hero-img" src={kapakOfis} alt="Mimarlık Hizmetlerimiz" />

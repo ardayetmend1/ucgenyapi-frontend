@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../components/SEO/SEO';
 import './Contact.css';
 import { fetchProjects, submitContact } from '../../services/api';
 import blokHavuz from '../../assets/images/blok-havuz.jpg';
@@ -41,6 +42,7 @@ function Contact() {
 
   return (
     <div className="contact">
+      <SEO path="/iletisim" />
       <img className="contact__bg" src={blokHavuz} alt="" />
       <div className="contact__overlay" />
 
