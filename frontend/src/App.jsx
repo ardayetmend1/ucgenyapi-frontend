@@ -4,7 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import SEO from './components/SEO/SEO';
 import HeroSection from './components/HeroSection/HeroSection';
 import AboutSection from './components/AboutSection/AboutSection';
-import ProjectsSection from './components/ProjectsSection/ProjectsSection';
+import ServicesSection from './components/ServicesSection/ServicesSection';
 import ReferencesSection from './components/ReferencesSection/ReferencesSection';
 import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact';
@@ -18,7 +18,7 @@ function HomePage() {
       <SEO path="/" />
       <HeroSection />
       <AboutSection />
-      <ProjectsSection />
+      <ServicesSection />
       <ReferencesSection />
       <Footer />
     </>
@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/iletisim" element={<Contact />} />
-            <Route path="/mimarlik-hizmetlerimiz" element={<MimarlikHizmetlerimiz />} />
+            <Route path="/insaat-hizmetlerimiz" element={<MimarlikHizmetlerimiz />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/sifre-sifirla" element={<ResetPassword />} />
           </Routes>

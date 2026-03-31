@@ -6,8 +6,8 @@ import { useAuth } from '../../context/AuthContext';
 import { Editable } from '../EditPopup/EditPopup';
 import { updateAboutImage, deleteAboutImage, updateSiteContent } from '../../services/adminApi';
 
-import blokDetail from '../../assets/images/blok-detail.jpg';
-import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
+import kapakOfis from '../../../mimarlikgorseller/kapakofis.jpeg';
+import galeri1 from '../../../mimarlikgorseller/WhatsApp Image 2026-03-11 at 07.15.40.jpeg';
 import mutfak from '../../assets/images/mutfak.jpg';
 
 function useScrollReveal() {
@@ -43,8 +43,8 @@ function useScrollReveal() {
 }
 
 const fallbackImages = [
-  { src: blokDetail, alt: 'Üçgen Yapı — Modern Bina Cephesi' },
-  { src: sosyalTesis, alt: 'Üçgen Yapı — Sosyal Tesis Alanı' },
+  { src: kapakOfis, alt: 'Üçgen Yapı — Modern Ofis Tasarımı' },
+  { src: galeri1, alt: 'Üçgen Yapı — Mimarlık Projesi' },
   { src: mutfak, alt: 'Üçgen Yapı — Modern Mutfak Tasarımı' },
 ];
 
@@ -182,10 +182,6 @@ function AboutSection() {
             }
             return <div key={i}>{imageContent}</div>;
           })}
-          <div className="about__badge" ref={observe}>
-            <span className="about__badge-number">{c('about_badge_number', 'A+')}</span>
-            <span className="about__badge-text">{c('about_badge_text', 'Kalite Güvencesi')}</span>
-          </div>
         </div>
 
         {/* Right: Text Content */}
@@ -253,28 +249,6 @@ function AboutSection() {
         </div>
       </div>
 
-      {/* ── Process Timeline ── */}
-      <div className="about__process">
-        <div className="about__process-title" ref={observe}>
-          Proje Sürecimiz
-        </div>
-        <div className="about__timeline">
-          {[
-            { num: '01', label: 'Fikir & Başlangıç', desc: 'Arazi analizi ve konsept geliştirme' },
-            { num: '02', label: 'Plan & Tasarım', desc: 'Mimari proje ve mühendislik çalışmaları' },
-            { num: '03', label: 'Yapım & Montaj', desc: 'Kalite kontrolü eşliğinde inşaat süreci' },
-            { num: '04', label: 'Proje Teslimatı', desc: 'Detaylı kontrol ve anahtar teslim' },
-            { num: '05', label: 'Müşteri Memnuniyeti', desc: 'Satış sonrası destek ve garanti' },
-          ].map((step) => (
-            <div className="about__step" key={step.num} ref={observe}>
-              <span className="about__step-number">{step.num}</span>
-              <div className="about__step-dot" />
-              <span className="about__step-label">{step.label}</span>
-              <span className="about__step-desc">{step.desc}</span>
-            </div>
-          ))}
-        </div>
-      </div>
       {/* ── Lightbox ── */}
       {lightbox !== null && (
         <div className="about__lightbox" onClick={() => setLightbox(null)}>

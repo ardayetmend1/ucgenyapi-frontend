@@ -181,10 +181,11 @@
 }
 
 .hero__logo-img {
-  height: 48px;
+  height: 72px;
   width: auto;
   object-fit: contain;
   border-radius: 4px;
+  margin-top: 6px;
 }
 
 .hero__logo-text {

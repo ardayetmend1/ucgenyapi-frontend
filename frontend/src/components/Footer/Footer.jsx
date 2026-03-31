@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 import { useSiteContent } from '../../context/SiteContentContext';
 import { fetchProjects } from '../../services/api';
-import ucgenLogo from '../../../görseller/logoucgen.jpeg';
+import ucgenLogo from '../../../mimarlikgorseller/IMG_2158.svg';
 
 function Footer() {
   const c = useSiteContent();
@@ -47,8 +47,9 @@ function Footer() {
         <div className="footer__col">
           <h4 className="footer__col-title">Hızlı Erişim</h4>
           <ul className="footer__links">
-            <li><a href="#projeler">Projeler</a></li>
+            <li><a href="#hizmetlerimiz">Hizmetlerimiz</a></li>
             <li><a href="#hakkimizda">Hakkımızda</a></li>
+            <li><Link to="/insaat-hizmetlerimiz">İnşaat Hizmetlerimiz</Link></li>
             <li><Link to="/iletisim">İletişim</Link></li>
             <li><Link to="/iletisim">Randevu Al</Link></li>
           </ul>
@@ -60,12 +61,12 @@ function Footer() {
           <ul className="footer__links">
             {projectsList.length > 0 ? (
               projectsList.map((p) => (
-                <li key={p.slug}><a href="#projeler">{p.name}</a></li>
+                <li key={p.slug}><Link to="/insaat-hizmetlerimiz">{p.name}</Link></li>
               ))
             ) : (
               <>
-                <li><a href="#projeler">Üçgen Yaşam Konutları</a></li>
-                <li><a href="#projeler">Üçgen Yaşam Konutları 2</a></li>
+                <li><Link to="/insaat-hizmetlerimiz">Üçgen Yaşam Konutları</Link></li>
+                <li><Link to="/insaat-hizmetlerimiz">Üçgen Yaşam Konutları 2</Link></li>
               </>
             )}
           </ul>

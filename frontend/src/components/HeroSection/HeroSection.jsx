@@ -13,9 +13,11 @@ import blokDetail from '../../assets/images/blok-detail.jpg';
 import arazi from '../../assets/images/arazi.jpg';
 import salon from '../../assets/images/salon.jpg';
 import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
-import ucgenLogo from '../../../görseller/logoucgen.jpeg';
+import kapakOfis from '../../../mimarlikgorseller/kapakofis.jpeg';
+import ucgenLogo from '../../../mimarlikgorseller/IMG_2158.svg';
 
 const fallbackSlides = [
+  { src: kapakOfis, alt: 'Üçgen Yapı — Modern Ofis' },
   { src: blokHavuz, alt: 'Üçgen Yapı — Havuz ve Yaşam Alanı' },
   { src: arazi, alt: 'Üçgen Yapı — Proje Kuşbakışı' },
   { src: blokDetail, alt: 'Üçgen Yapı — Bina Detay' },
@@ -118,9 +120,9 @@ function HeroSection() {
         </div>
 
         <ul className="hero__nav-links">
-          <li><a href="#projeler">Projeler</a></li>
+          <li><a href="#hizmetlerimiz">Hizmetlerimiz</a></li>
           <li><a href="#hakkimizda">Hakkımızda</a></li>
-          <li><Link to="/mimarlik-hizmetlerimiz">Mimarlık Hizmetlerimiz</Link></li>
+          <li><Link to="/insaat-hizmetlerimiz">İnşaat Hizmetlerimiz</Link></li>
           <li><Link to="/iletisim">İletişim</Link></li>
         </ul>
 
@@ -165,9 +167,9 @@ function HeroSection() {
       {mobileMenuOpen && (
         <div className="hero__mobile-menu" onClick={() => setMobileMenuOpen(false)}>
           <div className="hero__mobile-menu-content" onClick={(e) => e.stopPropagation()}>
-            <a href="#projeler" onClick={() => setMobileMenuOpen(false)}>Projeler</a>
+            <a href="#hizmetlerimiz" onClick={() => setMobileMenuOpen(false)}>Hizmetlerimiz</a>
             <a href="#hakkimizda" onClick={() => setMobileMenuOpen(false)}>Hakkımızda</a>
-            <Link to="/mimarlik-hizmetlerimiz" onClick={() => setMobileMenuOpen(false)}>Mimarlık Hizmetlerimiz</Link>
+            <Link to="/insaat-hizmetlerimiz" onClick={() => setMobileMenuOpen(false)}>İnşaat Hizmetlerimiz</Link>
             <Link to="/iletisim" onClick={() => setMobileMenuOpen(false)}>İletişim</Link>
             <Link to="/iletisim" className="hero__mobile-menu-cta" onClick={() => setMobileMenuOpen(false)}>Randevu Al</Link>
           </div>
@@ -240,8 +242,8 @@ function HeroSection() {
         </Editable>
 
         <div className="hero__actions">
-          <a href="#projeler" className="hero__btn hero__btn--primary">
-            Projeyi Keşfet
+          <a href="#hizmetlerimiz" className="hero__btn hero__btn--primary">
+            Hizmetlerimiz
             <span className="hero__btn-arrow" aria-hidden="true">→</span>
           </a>
           <Link to="/iletisim" className="hero__btn hero__btn--secondary">

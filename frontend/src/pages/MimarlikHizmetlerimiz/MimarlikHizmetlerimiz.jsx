@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SEO from '../../components/SEO/SEO';
 import './MimarlikHizmetlerimiz.css';
 import { fetchArchitectureGalleryImages, fetchArchitectureServices } from '../../services/api';
+import ProjectsSection from '../../components/ProjectsSection/ProjectsSection';
 import { useAuth } from '../../context/AuthContext';
 import { Editable } from '../../components/EditPopup/EditPopup';
 import {
@@ -11,6 +12,11 @@ import {
 } from '../../services/adminApi';
 
 import kapakOfis from '../../../mimarlikgorseller/kapakofis.jpeg';
+import blokHavuz from '../../assets/images/blok-havuz.jpg';
+import blokDetail from '../../assets/images/blok-detail.jpg';
+import arazi from '../../assets/images/arazi.jpg';
+import salon from '../../assets/images/salon.jpg';
+import sosyalTesis from '../../assets/images/sosyal-tesis.jpg';
 import galeri1 from '../../../mimarlikgorseller/WhatsApp Image 2026-03-11 at 07.15.40.jpeg';
 import galeri2 from '../../../mimarlikgorseller/WhatsApp Image 2026-03-11 at 07.15.40 (1).jpeg';
 import galeri3 from '../../../mimarlikgorseller/WhatsApp Image 2026-03-11 at 07.15.41.jpeg';
@@ -34,6 +40,14 @@ const fallbackServices = [
   { icon: '📐', title: 'Proje & Danışmanlık', description: 'Yapı projelerinizde fizibilite, maliyet analizi ve süreç yönetimi konularında uzman danışmanlık hizmeti sağlıyoruz.' },
 ];
 
+const heroSlides = [
+  { src: blokHavuz, alt: 'Üçgen Yapı — Havuz ve Yaşam Alanı' },
+  { src: arazi, alt: 'Üçgen Yapı — Proje Kuşbakışı' },
+  { src: blokDetail, alt: 'Üçgen Yapı — Bina Detay' },
+  { src: salon, alt: 'Üçgen Yapı — Modern Salon' },
+  { src: sosyalTesis, alt: 'Üçgen Yapı — Sosyal Tesis' },
+];
+
 const galleryFields = [
   { key: 'imageUrl', label: 'Görsel URL', type: 'text' },
   { key: 'alt', label: 'Alt Metin', type: 'text' },
@@ -48,6 +62,7 @@ const serviceFields = [
 function MimarlikHizmetlerimiz() {
   const navigate = useNavigate();
   const sectionRefs = useRef([]);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [activeGallery, setActiveGallery] = useState(0);
   const galleryTrackRef = useRef(null);
   const [galleryImages, setGalleryImages] = useState(fallbackGalleryImages);
@@ -85,6 +100,14 @@ function MimarlikHizmetlerimiz() {
   useEffect(() => {
     loadGallery();
     loadServices();
+  }, []);
+
+  // Hero slider auto-rotation
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
   const nextGallery = useCallback(() => {
@@ -156,10 +179,19 @@ function MimarlikHizmetlerimiz() {
 
   return (
     <div className="mh">
-      <SEO path="/mimarlik-hizmetlerimiz" />
+      <SEO path="/insaat-hizmetlerimiz" />
       {/* ── Hero Section ── */}
       <section className="mh__hero">
-        <img className="mh__hero-img" src={kapakOfis} alt="Mimarlık Hizmetlerimiz" />
+        <div className="mh__hero-slider">
+          {heroSlides.map((slide, i) => (
+            <div
+              key={i}
+              className={`mh__hero-slide ${i === activeHeroSlide ? 'mh__hero-slide--active' : ''}`}
+            >
+              <img src={slide.src} alt={slide.alt} loading={i === 0 ? 'eager' : 'lazy'} />
+            </div>
+          ))}
+        </div>
         <div className="mh__hero-overlay" />
         <div className="mh__hero-grain" />
 
@@ -173,7 +205,7 @@ function MimarlikHizmetlerimiz() {
         <div className="mh__hero-content">
           <span className="mh__hero-label">Üçgen Yapı</span>
           <h1 className="mh__hero-title">
-            Mimarlık <em>Hizmetlerimiz</em>
+            İnşaat <em>Hizmetlerimiz</em>
           </h1>
           <p className="mh__hero-desc">
             Ofis, depo yapımlarından tadilatına, iç dekorasyondan mimari projelere kadar
@@ -326,6 +358,9 @@ function MimarlikHizmetlerimiz() {
           )}
         </div>
       </section>
+
+      {/* ── Projects Section (full) ── */}
+      <ProjectsSection />
 
       {/* ── CTA Section ── */}
       <section className="mh__cta" ref={addRef}>
