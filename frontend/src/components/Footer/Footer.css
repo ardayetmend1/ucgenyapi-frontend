@@ -237,3 +237,21 @@
     padding: 20px 0;
   }
 }
+
+/* ── L1A Badge ── */
+.footer__l1a {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 16px;
+}
+
+.footer__l1a-img {
+  height: 32px;
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer__l1a-img:hover {
+  opacity: 1;
+}

@@ -4,6 +4,7 @@ import './Footer.css';
 import { useSiteContent } from '../../context/SiteContentContext';
 import { fetchProjects } from '../../services/api';
 import ucgenLogo from '../../../mimarlikgorseller/IMG_2158.svg';
+import l1aImg from '../../../mimarlikgorseller/l1a (1).png';
 
 function Footer() {
   const c = useSiteContent();
@@ -110,6 +111,11 @@ function Footer() {
             {c('footer_credits', 'Kalite ve güvenin adresi.')}
           </p>
         </div>
+      </div>
+
+      {/* L1A Badge */}
+      <div className="footer__l1a">
+        <img src={l1aImg} alt="L1A" className="footer__l1a-img" />
       </div>
     </footer>
   );
